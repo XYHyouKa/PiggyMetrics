@@ -1,16 +1,13 @@
 {
   "name": "Java 8 · Maven 3.8.8 · Gradle 8.14.3",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "8",
       "distribution": "temurin"
-    },
-    "ghcr.io/devcontainers/features/maven:1": {
-      "version": "3.8.8"
-    },
-    "ghcr.io/devcontainers/features/gradle:1": {
-      "version": "8.14.3"
     }
   },
   "postCreateCommand": "java -version && mvn -v && gradle --version",
