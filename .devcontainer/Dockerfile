@@ -14,9 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV GRADLE_VERSION=8.14.3
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
+    unzip \
     && mkdir -p /opt/gradle \
     && curl -fsSL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /tmp/gradle.zip \
-    && unzip -q /tmp/gradle.zip -d /opt/gradle --strip-components=1 \
+    && unzip -q /tmp/gradle.zip -d /tmp/gradle-temp \
+    && mv /tmp/gradle-temp/gradle-${GRADLE_VERSION}/* /opt/gradle/ \
+    && rmdir /tmp/gradle-temp/gradle-${GRADLE_VERSION} /tmp/gradle-temp \
     && ln -s /opt/gradle/bin/gradle /usr/local/bin/gradle \
     && rm -f /tmp/gradle.zip \
     && rm -rf /var/lib/apt/lists/*
